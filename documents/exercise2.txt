@@ -1,0 +1,95 @@
+int gSize = 50;
+PImage b;
+int tCounter = 0;
+PFont f; 
+int value = 0; 
+void setup() { 
+  size(500, 500);
+   rectMode(CENTER);
+   frameRate(10);
+  b = loadImage("img3.jpg");
+  //load font
+  f = createFont("Calluna-Regular", 24);
+  //set the font for drawing
+  textFont(f);
+  // set color of text
+  fill(0, 255, 0);
+  //draw out text
+  text("Face", 100, 100);
+} 
+void draw() { 
+  background(135, 162, 201-value,50); 
+  tint(255, 128);
+  image(b, 0, 0);
+  noTint();
+  stroke(255, 181, 181-value);
+  strokeWeight(5);
+  noFill();
+  ellipse(width/2, height/2, 250, 400);
+  curve(250, 200, 250, 200, 250, 350, 15, 65);
+  arc(180, 200, 60, 60, 0, PI);
+  line(180, 230, 180, 248);
+  line(160, 225, 150, 235);
+  line(200, 222, 212, 241);
+  ellipse(310, 210, 60, 60);
+  
+  for (int i=1; i<40; i++) {  
+  
+  int m = (i % 30);
+  println(i + " " + m );
+  rect (500,m*20,20,20);
+  rect (m*20,0,20,20);
+  rect (m*20,500,20,20);
+  rect (0,m*20,20,20);
+  record(); 
+  }
+} 
+
+void keyPressed() { 
+
+  if ( key == 'c' || key == 'C' ) { 
+    // example of toggle logic 
+    if (value == 0) { 
+      value = 255;
+    } else { 
+      value = 0;
+    }
+  }
+  fill(value);
+  curve(250, 200, 250, 200, 250, 350, 15, 65);
+  arc(180, 200, 60, 60, 0, PI);
+  line(180, 230, 180, 248);
+  line(160, 225, 150, 235);
+  line(200, 222, 212, 241);
+  ellipse(310, 210, 60, 60);
+} 
+
+void mouseMoved() {
+  value = value + 5;
+  if (value > 255) {
+    value = 0;
+  }
+   fill(47, 234, 237);
+  text("Face", tCounter, 400);
+   fill(94, 52, 235);
+    text("Face ", 200, tCounter);
+  
+  // this is an example of 'and' logic
+  if ( mousePressed && keyPressed == true )  {
+    fill(255, 0, 0);
+    text("Face ", 400, tCounter);
+  }
+  
+  tCounter ++;
+  if (tCounter > width) {
+    tCounter = -50;
+  }
+}
+
+void record(){
+  if(frameCount < 200){
+    saveFrame("images/testr_####.jpg");
+  }else{
+    exit();
+  }
+}
